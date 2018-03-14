@@ -1,10 +1,11 @@
 #include <string>
 #include <vector>
+#include <map>
 #include <initializer_list>
+#include <iostream>
+
 namespace exd{
 using namespace std;
-// using string = std::string;
-// using basic_string = std::__cxx11::basic_string;
 template<typename _CharT, typename _Traits, typename _Alloc>
   std::vector<basic_string<_CharT, _Traits, _Alloc>>
   split(const basic_string<_CharT, _Traits, _Alloc>& str, const _CharT* delims=" \t") {
@@ -47,9 +48,31 @@ template<typename _CharT, typename _Traits, typename _Alloc>
   basic_string<_CharT, _Traits, _Alloc>
   join(const std::vector<basic_string<_CharT, _Traits, _Alloc>>& vec, const _CharT* sep =" ") {
     basic_string<_CharT, _Traits, _Alloc> res;
-    for (auto& elem : vec) res.append(elem + sep);
-    res.erase(--res.end());
+    for (auto elem = std::begin(vec); elem != std::end(vec) - 1; ++elem)
+      res.append(*elem + sep);
+    res.append(vec.back());
     return res;
   }
 
+}
+
+template<typename T>
+std::ostream& operator<<(std::ostream& s, const std::vector<T>& v) {
+  s.put('[');
+  char comma[3] = {'\0', ' ', '\0'};
+  for (const auto& e : v) {
+    s << comma << e;
+    comma[0] = ',';
+  }
+  return s << ']';
+}
+template<typename T1, typename T2>
+std::ostream& operator<<(std::ostream& s, const std::map<T1, T2>& m) {
+  s.put('{');
+  char comma[3] = {'\0', ' ', '\0'};
+  for (const auto& p : m) {
+    s << comma << p.first << ':' << p.second;
+    comma[0] = ',';
+  }
+  return s << '}';
 }
