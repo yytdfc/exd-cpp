@@ -1,7 +1,7 @@
 SRCS=$(wildcard ./*.cc)
 EXES=$(SRCS:.cc=)
 CXX = g++
-CXX_FLAG = -std=c++11 -I../include
+CXX_FLAG = -std=c++11 -I../include -O3
 LD_FLAGS = 
 
 .PHONY: all clean

@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <array>
 #include <map>
 #include <initializer_list>
 #include <iostream>
@@ -61,6 +62,16 @@ std::ostream& operator<<(std::ostream& s, const std::vector<T>& v) {
   s.put('[');
   char comma[3] = {'\0', ' ', '\0'};
   for (const auto& e : v) {
+    s << comma << e;
+    comma[0] = ',';
+  }
+  return s << ']';
+}
+template <typename T, size_t N>
+std::ostream& operator<<(std::ostream& s, const std::array<T, N>& a) {
+  s.put('[');
+  char comma[3] = {'\0', ' ', '\0'};
+  for (const auto& e : a) {
     s << comma << e;
     comma[0] = ',';
   }
