@@ -1,7 +1,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 #include "random.hpp"
+#include "io.hpp"
 TEST(exd, random) {
   // randint
   for (auto i = 0; i != 32; ++i) {
@@ -23,8 +23,22 @@ TEST(exd, random) {
     EXPECT_GE(r, 0);
     EXPECT_LE(r, 1);
   }
+  // distribution
+  auto dist = exd::random::distribution(std::normal_distribution<>(5, 2));
+  for (auto i = 0; i != 10; ++i) {
+    dist();
+  }
   // shuffle vector
-  std::vector<int> aa{1, 2, 3, 4, 5, 6, 7, 8, 9};
-  exd::random::shuffle(aa);
-  exd::random::shuffle(aa);
+  std::vector<int> a{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  exd::random::seed(1);
+  exd::random::shuffle(a);
+  std::vector<int> b{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  exd::random::seed(1);
+  exd::random::shuffle(b);
+  EXPECT_EQ(a, b);
+  std::vector<int> c{1, 2, 3, 4, 5, 6, 7, 8, 9};
+  exd::random::seed(2);
+  exd::random::shuffle(c);
+  std::cout << c;
+  EXPECT_NE(a, c);
 }

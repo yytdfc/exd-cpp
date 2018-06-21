@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 #include "io.hpp"
 TEST(exd, io) {
   // oss vector

@@ -17,7 +17,7 @@ foreach(i ${TEST})
   message(STATUS "Test case : ${CASE_NAME} - ${i}")
   add_executable(${CASE_NAME} ${i})
   target_link_libraries(${CASE_NAME} gtest_main gtest pthread glog)
-  add_test(test-exd ${CASE_NAME})
+  add_test(${CASE_NAME} ${CASE_NAME})
 endforeach(i)
 
 

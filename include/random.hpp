@@ -9,24 +9,33 @@ class RandomClass
  public:
   RandomClass() {
     std::random_device rd;
-    engine_.seed(rd());
+    seed(rd());
   };
+  void seed(std::size_t value) { engine_.seed(value); };
   std::mt19937_64 engine_;
 };
 static RandomClass instance;
+/* distribution */
+template <class DistributionType>
+class distribution
+{
+ public:
+  distribution(DistributionType dist) : dist_(dist){};
+  auto                          operator()() { return dist_(instance.engine_); }
+
+ private:
+  DistributionType dist_;
+};
 }  // namespace RandomImplement
 
 static auto& engine = RandomImplement::instance.engine_;
+
+static void seed(std::size_t value) { RandomImplement::instance.seed(value); };
 
 /*return a random number in [0,1]*/
 template <typename RealType = double>
 RealType random() {
   return (RealType)engine() / engine.max();
-};
-
-template <typename RealType = double>
-RealType random(RealType b) {
-  return b * random();
 };
 
 /*return a random number in [a,b], numbers can be gened*/
@@ -36,10 +45,23 @@ RealType random(RealType a, RealType b) {
   return (b - a) * random() + a;
 };
 
+template <typename RealType = double>
+RealType random(RealType b) {
+  return b * random();
+};
+
+template <class DistributionType>
+RandomImplement::distribution<DistributionType> distribution(
+    DistributionType dist) {
+  return RandomImplement::distribution<DistributionType>(dist);
+};
+
 /*return a random number in [a,b), numbers can be gened*/
 template <typename IntType = int>
 IntType randint(IntType a, IntType b) {
-  if (a == b) b = a + 1;
+  if (a > b) std::swap(a, b);
+  else if (a == b)
+    b = a + 1;
   return engine() % (b - a) + a;
 };
 
