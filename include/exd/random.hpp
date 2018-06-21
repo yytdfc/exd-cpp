@@ -1,6 +1,7 @@
 #ifndef __EXD_RANDOM__
 #define __EXD_RANDOM__
 #include <random>
+#include <algorithm>
 namespace exd {
 namespace random {
 namespace RandomImplement {
