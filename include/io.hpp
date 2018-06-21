@@ -1,10 +1,9 @@
 #ifndef __EXD_IO__
 #define __EXD_IO__
-#include <array>
-#include <initializer_list>
 #include <iostream>
 #include <map>
 #include <vector>
+#include <array>
 template <typename T>
 std::ostream& operator<<(std::ostream& s, const std::vector<T>& v) {
   s.put('[');

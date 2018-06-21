@@ -7,13 +7,18 @@ include_directories(include include)
 
 aux_source_directory(test      TEST)
 
-enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-add_executable(test-exd test/test-exd.cc )
-target_link_libraries(test-exd gtest_main gtest pthread glog)
 
-add_test(test-exd test-exd)
+enable_testing()
+foreach(i ${TEST})
+  STRING(REGEX REPLACE ".+/(.+)\\..*" "\\1" CASE_NAME ${i})
+  message(STATUS "Test case : ${CASE_NAME} - ${i}")
+  add_executable(${CASE_NAME} ${i})
+  target_link_libraries(${CASE_NAME} gtest_main gtest pthread glog)
+  add_test(test-exd ${CASE_NAME})
+endforeach(i)
+
 
 

@@ -3,7 +3,9 @@
 
 // inspired from https://www.cnblogs.com/qicosmos/p/3540435.html
 
-#include <random>
+#include <vector>
+#include <sstream>
+
 namespace exd {
 namespace range {
 
