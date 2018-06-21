@@ -4,6 +4,7 @@
 #include "string.hpp"
 #include "io.hpp"
 #include "random.hpp"
+#include "range.hpp"
 
 TEST(exd, string) {
   // exd::split
@@ -69,6 +70,13 @@ TEST(exd, random) {
   std::cout << "After shuffle:  " << aa << std::endl;
   exd::random::shuffle(aa);
   std::cout << "After shuffle:  " << aa << std::endl;
+}
+
+TEST(exd, range) {
+  for (auto i : exd::range::range(0, 10, 2))
+    std::cout << i << "  ";
+  std::cout << std::endl;
+  std::cout << exd::range::range(0, 10, 3).to_vector() << std::endl;
 }
 
 int main(int argc, char* argv[]) {
