@@ -1,7 +1,6 @@
 #include <iostream>
 #include <gtest/gtest.h>
-#include "random.hpp"
-#include "io.hpp"
+#include "exd/random.hpp"
 TEST(exd, random) {
   // randint
   for (auto i = 0; i != 32; ++i) {
@@ -39,6 +38,5 @@ TEST(exd, random) {
   std::vector<int> c{1, 2, 3, 4, 5, 6, 7, 8, 9};
   exd::random::seed(2);
   exd::random::shuffle(c);
-  std::cout << c;
   EXPECT_NE(a, c);
 }

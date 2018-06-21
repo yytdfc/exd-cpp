@@ -1,6 +1,6 @@
 #include <iostream>
 #include <gtest/gtest.h>
-#include "string.hpp"
+#include "exd/string.hpp"
 
 TEST(exd, string) {
   // exd::split
