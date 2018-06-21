@@ -4,7 +4,6 @@
 #include <vector>
 namespace exd {
 namespace string {
-// using namespace std;
 template <typename _CharT, typename _Traits, typename _Alloc>
 std::vector<std::basic_string<_CharT, _Traits, _Alloc>> split(
     const std::basic_string<_CharT, _Traits, _Alloc>& str,
@@ -66,6 +65,6 @@ std::basic_string<_CharT, _Traits, _Alloc> join(
   res.erase(--res.end());
   return res;
 }
-}
-}
+}  // namespace string
+}  // namespace exd
 #endif  //__EXD_STRING__
